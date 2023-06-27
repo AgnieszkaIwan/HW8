@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import styles from './ContactForm.module.css';
+import classNames from 'classnames';
 
 const ContactForm = ({ addContact, contacts }) => {
   const [name, setName] = useState('');
@@ -33,13 +35,14 @@ const ContactForm = ({ addContact, contacts }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.container} onSubmit={handleSubmit}>
       <input
         type="text"
         name="name"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
+        className={classNames(styles.input)}
         value={name}
         onChange={e => setName(e.target.value)}
       />
@@ -49,10 +52,13 @@ const ContactForm = ({ addContact, contacts }) => {
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
+        className={classNames(styles.input)}
         value={number}
         onChange={e => setNumber(e.target.value)}
       />
-      <button type="submit">Add Contact</button>
+      <button type="submit" className={classNames(styles.button)}>
+        Add Contact
+      </button>
     </form>
   );
 };

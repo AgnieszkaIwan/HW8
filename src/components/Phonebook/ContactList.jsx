@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './ContactList.module.css';
 
 const ContactList = ({ contacts, filter, deleteContact }) => {
   const filteredContacts = contacts.filter(contact =>
@@ -10,11 +11,16 @@ const ContactList = ({ contacts, filter, deleteContact }) => {
   };
 
   return (
-    <ul>
+    <ul className={styles.list}>
       {filteredContacts.map(contact => (
-        <li key={contact.id}>
+        <li key={contact.id} className={styles.listItem}>
           {contact.name} - {contact.number}
-          <button onClick={() => handleDelete(contact.id)}>Delete</button>
+          <button
+            onClick={() => handleDelete(contact.id)}
+            className={styles.deleteButton}
+          >
+            Delete
+          </button>
         </li>
       ))}
     </ul>
