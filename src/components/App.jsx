@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ContactForm from './Phonebook/ContactForm';
-import ContactList from './Phonebook/ContactList';
-import Filter from './Phonebook/Filter';
+import ContactForm from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList';
+import Filter from './Filter/Filter';
 import {
   NotificationContainer,
   NotificationManager,
