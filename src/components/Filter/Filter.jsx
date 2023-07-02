@@ -1,19 +1,19 @@
 import React from 'react';
 import styles from './Filter.module.css';
 
-const Filter = ({ filter, setFilter }) => {
-  const handleFilterChange = e => {
-    setFilter(e.target.value);
-  };
-
+const Filter = ({ filter, onFilterChange }) => {
   return (
-    <input
-      type="text"
-      placeholder="Search contacts..."
-      className={styles.input}
-      value={filter}
-      onChange={handleFilterChange}
-    />
+    <div>
+      <label htmlFor="filter">Filter contacts by name:</label>
+      <input
+        type="text"
+        id="filter"
+        name="filter"
+        value={filter}
+        onChange={onFilterChange}
+        placeholder="Enter name"
+      />
+    </div>
   );
 };
 
