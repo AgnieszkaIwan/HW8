@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
@@ -9,13 +9,20 @@ const ContactForm = ({ addContact, contacts }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  useEffect(() => {
+    const checkIfContactExists = name => {
+      return contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      );
+    };
 
     if (checkIfContactExists(name)) {
       NotificationManager.error('Contact already exists!', 'Error');
-      return;
     }
+  }, [contacts, name]);
+
+  const handleSubmit = e => {
+    e.preventDefault();
 
     const contact = {
       id: nanoid(),
@@ -28,11 +35,11 @@ const ContactForm = ({ addContact, contacts }) => {
     setNumber('');
   };
 
-  const checkIfContactExists = name => {
-    return contacts.some(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
-    );
-  };
+  // checkIfContactExists = name => {
+  //   return contacts.some(
+  //     contact => contact.name.toLowerCase() === name.toLowerCase()
+  //   );
+  // };
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>

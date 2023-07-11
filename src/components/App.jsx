@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
@@ -9,33 +9,25 @@ import {
 } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
-export class App extends React.Component {
-  state = {
-    contacts: [],
-    filter: '',
-    name: '',
-    number: '',
-  };
+export const App = () => {
+  const [contacts, setContacts] = useState([]);
+  const [filter, setFilter] = useState('');
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  componentDidMount() {
+  useEffect(() => {
     const storedContacts = localStorage.getItem('contacts');
     if (storedContacts) {
-      this.setState({ contacts: JSON.parse(storedContacts) });
+      setContacts(JSON.parse(storedContacts));
     }
-  }
+  }, []);
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.contacts !== this.state.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-    }
-  }
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
-  componentWillUnmount() {
-    // Clean up any resources or event listeners if necessary
-  }
-
-  addContact = contact => {
-    if (this.checkIfContactExists(contact.name)) {
+  const addContact = contact => {
+    if (checkIfContactExists(contact.name)) {
       NotificationManager.error('Contact already exists!', 'Error');
       return;
     }
@@ -46,66 +38,50 @@ export class App extends React.Component {
       number: contact.number,
     };
 
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, newContact],
-      name: '',
-      number: '',
-    }));
+    setContacts(prevContacts => [...prevContacts, newContact]);
+    setName('');
+    setNumber('');
   };
 
-  deleteContact = id => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== id),
-    }));
+  const deleteContact = id => {
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== id)
+    );
   };
 
-  checkIfContactExists = name => {
-    return this.state.contacts.some(
+  const checkIfContactExists = name => {
+    return contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
   };
 
-  handleFilterChange = event => {
-    this.setState({ filter: event.target.value });
+  const handleFilterChange = event => {
+    setFilter(event.target.value);
   };
 
-  handleNameChange = name => {
-    this.setState({ name });
-  };
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
-  handleNumberChange = number => {
-    this.setState({ number });
-  };
+  return (
+    <div>
+      <h1>Phonebook</h1>
+      <ContactForm
+        addContact={addContact}
+        contacts={contacts}
+        name={name}
+        onNameChange={setName}
+        number={number}
+        onNumberChange={setNumber}
+      />
 
-  render() {
-    const { contacts, filter, name, number } = this.state;
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
+      <h2>Contacts</h2>
+      <Filter filter={filter} onFilterChange={handleFilterChange} />
+      <ContactList contacts={filteredContacts} deleteContact={deleteContact} />
 
-    return (
-      <div>
-        <h1>Phonebook</h1>
-        <ContactForm
-          addContact={this.addContact}
-          contacts={contacts}
-          name={name}
-          onNameChange={this.handleNameChange}
-          number={number}
-          onNumberChange={this.handleNumberChange}
-        />
-
-        <h2>Contacts</h2>
-        <Filter filter={filter} onFilterChange={this.handleFilterChange} />
-        <ContactList
-          contacts={filteredContacts}
-          deleteContact={this.deleteContact}
-        />
-
-        <NotificationContainer />
-      </div>
-    );
-  }
-}
+      <NotificationContainer />
+    </div>
+  );
+};
 
 export default App;
