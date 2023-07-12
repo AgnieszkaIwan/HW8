@@ -26,6 +26,10 @@ export const App = () => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
+  const updateContactsInLocalStorage = updatedContacts => {
+    localStorage.setItem('contacts', JSON.stringify(updatedContacts));
+  };
+
   const addContact = contact => {
     if (checkIfContactExists(contact.name)) {
       NotificationManager.error('Contact already exists!', 'Error');
@@ -38,15 +42,21 @@ export const App = () => {
       number: contact.number,
     };
 
-    setContacts(prevContacts => [...prevContacts, newContact]);
+    setContacts(prevContacts => {
+      const updatedContacts = [...prevContacts, newContact];
+      updateContactsInLocalStorage(updatedContacts);
+      return updatedContacts;
+    });
     setName('');
     setNumber('');
   };
 
   const deleteContact = id => {
-    setContacts(prevContacts =>
-      prevContacts.filter(contact => contact.id !== id)
-    );
+    setContacts(prevContacts => {
+      const updatedContacts = prevContacts.filter(contact => contact.id !== id);
+      updateContactsInLocalStorage(updatedContacts);
+      return updatedContacts;
+    });
   };
 
   const checkIfContactExists = name => {
