@@ -1,6 +1,15 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFilter } from '../contactsSlice';
 
-const Filter = ({ filter, onFilterChange }) => {
+const Filter = () => {
+  const filter = useSelector(state => state.contacts.filter);
+  const dispatch = useDispatch();
+
+  const handleFilterChange = event => {
+    dispatch(setFilter(event.target.value));
+  };
+
   return (
     <div>
       <label htmlFor="filter">Filter contacts by name:</label>
@@ -9,7 +18,7 @@ const Filter = ({ filter, onFilterChange }) => {
         id="filter"
         name="filter"
         value={filter}
-        onChange={onFilterChange}
+        onChange={handleFilterChange}
         placeholder="Enter name"
       />
     </div>

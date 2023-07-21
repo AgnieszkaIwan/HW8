@@ -1,7 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../contactsSlice';
 import styles from './ContactList.module.css';
 
-const ContactList = ({ contacts, deleteContact }) => {
+const ContactList = ({ contacts }) => {
+  const dispatch = useDispatch();
+
+  const handleDeleteContact = id => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <ul>
       {contacts.map(contact => (
@@ -10,7 +18,7 @@ const ContactList = ({ contacts, deleteContact }) => {
           <span>{contact.number}</span>
           <button
             className={styles.deleteButton}
-            onClick={() => deleteContact(contact.id)}
+            onClick={() => handleDeleteContact(contact.id)}
           >
             Delete
           </button>
