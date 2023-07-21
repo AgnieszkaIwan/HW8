@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import App from './components/App';
 import store from './components/store';
 import 'react-notifications/lib/notifications.css';
+import './index.css';
 
 const rootElement = document.getElementById('root');
 
