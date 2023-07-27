@@ -57,6 +57,9 @@ const contactsReducer = createReducer(initialState, builder => {
     .addCase(deleteContact.rejected, (state, action) => {
       // Handle error
     });
+  builder.addCase(setFilter, (state, action) => {
+    state.filter = action.payload;
+  });
 });
 
 export default contactsReducer;
