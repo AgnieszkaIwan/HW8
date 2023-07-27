@@ -1,7 +1,23 @@
-import { createAction, createReducer } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createReducer,
+  createAsyncThunk,
+} from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export const addContact = createAction('contacts/add');
-export const deleteContact = createAction('contacts/delete');
+export const addContact = createAsyncThunk('contacts/add', async contact => {
+  const response = await axios.post(
+    'https://64c24ae1eb7fd5d6ebcf925f.mockapi.io/contacts',
+    contact
+  );
+  return response.data;
+});
+export const deleteContact = createAsyncThunk('contacts/delete', async id => {
+  await axios.delete(
+    `https://64c24ae1eb7fd5d6ebcf925f.mockapi.io/contacts/${id}`
+  );
+  return id;
+});
 export const setFilter = createAction('contacts/setFilter');
 
 const loadContactsFromLocalStorage = () => {
@@ -19,29 +35,27 @@ const initialState = {
   filter: '',
 };
 
-const saveContactsToLocalStorage = contacts => {
-  try {
-    const contactsData = JSON.stringify(contacts);
-    localStorage.setItem('contacts', contactsData);
-  } catch (error) {
-    console.error('Error saving contacts to local storage:', error);
-  }
-};
-
 const contactsReducer = createReducer(initialState, builder => {
   builder
-    .addCase(addContact, (state, action) => {
-      state.contacts.push(action.payload);
-      saveContactsToLocalStorage(state.contacts); // Save contacts to local storage
+    .addCase(addContact.pending, state => {
+      // Handle loading
     })
-    .addCase(deleteContact, (state, action) => {
+    .addCase(addContact.fulfilled, (state, action) => {
+      state.contacts.push(action.payload);
+    })
+    .addCase(addContact.rejected, (state, action) => {
+      // Handle error
+    })
+    .addCase(deleteContact.pending, state => {
+      // Handle loading
+    })
+    .addCase(deleteContact.fulfilled, (state, action) => {
       state.contacts = state.contacts.filter(
         contact => contact.id !== action.payload
       );
-      saveContactsToLocalStorage(state.contacts); // Save contacts to local storage
     })
-    .addCase(setFilter, (state, action) => {
-      state.filter = action.payload;
+    .addCase(deleteContact.rejected, (state, action) => {
+      // Handle error
     });
 });
 

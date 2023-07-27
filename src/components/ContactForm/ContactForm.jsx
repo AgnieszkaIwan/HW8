@@ -13,7 +13,7 @@ const ContactForm = () => {
   const contacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     if (checkIfContactExists(name)) {
@@ -27,9 +27,11 @@ const ContactForm = () => {
       number,
     };
 
-    dispatch(addContact(contact));
-    setName('');
-    setNumber('');
+    try {
+      await dispatch(addContact(contact));
+      setName('');
+      setNumber('');
+    } catch (error) {}
   };
 
   const checkIfContactExists = name => {

@@ -6,8 +6,10 @@ import styles from './ContactList.module.css';
 const ContactList = ({ contacts }) => {
   const dispatch = useDispatch();
 
-  const handleDeleteContact = id => {
-    dispatch(deleteContact(id));
+  const handleDeleteContact = async id => {
+    try {
+      await dispatch(deleteContact(id));
+    } catch (error) {}
   };
 
   return (
