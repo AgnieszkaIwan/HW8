@@ -6,18 +6,27 @@ import {
 import axios from 'axios';
 
 export const addContact = createAsyncThunk('contacts/add', async contact => {
-  const response = await axios.post(
-    'https://64c24ae1eb7fd5d6ebcf925f.mockapi.io/contacts',
-    contact
-  );
-  return response.data;
+  try {
+    const response = await axios.post(
+      'https://64c24ae1eb7fd5d6ebcf925f.mockapi.io/contacts',
+      contact
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to add contact');
+  }
 });
 export const deleteContact = createAsyncThunk('contacts/delete', async id => {
-  await axios.delete(
-    `https://64c24ae1eb7fd5d6ebcf925f.mockapi.io/contacts/${id}`
-  );
-  return id;
+  try {
+    await axios.delete(
+      `https://64c24ae1eb7fd5d6ebcf925f.mockapi.io/contacts/${id}`
+    );
+    return id;
+  } catch (error) {
+    throw new Error('Failed to delete contact');
+  }
 });
+
 export const setFilter = createAction('contacts/setFilter');
 
 const loadContactsFromLocalStorage = () => {
