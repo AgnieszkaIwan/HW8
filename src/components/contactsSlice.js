@@ -53,7 +53,7 @@ const contactsReducer = createReducer(initialState, builder => {
       state.contacts.push(action.payload);
     })
     .addCase(addContact.rejected, (state, action) => {
-      // Handle error
+      console.error(action.error.message);
     })
     .addCase(deleteContact.pending, state => {
       // Handle loading
@@ -64,7 +64,7 @@ const contactsReducer = createReducer(initialState, builder => {
       );
     })
     .addCase(deleteContact.rejected, (state, action) => {
-      // Handle error
+      console.error(action.error.message);
     });
   builder.addCase(setFilter, (state, action) => {
     state.filter = action.payload;
