@@ -29,18 +29,25 @@ export const deleteContact = createAsyncThunk('contacts/delete', async id => {
 
 export const setFilter = createAction('contacts/setFilter');
 
-const loadContactsFromLocalStorage = () => {
-  try {
-    const contactsData = localStorage.getItem('contacts');
-    return contactsData ? JSON.parse(contactsData) : [];
-  } catch (error) {
-    console.error('Error loading contacts from local storage:', error);
-    return [];
-  }
-};
+// const loadContactsFromLocalStorage = () => {
+//   try {
+//     const contactsData = localStorage.getItem('contacts');
+//     return contactsData ? JSON.parse(contactsData) : [];
+//   } catch (error) {
+//     console.error('Error loading contacts from local storage:', error);
+//     return [];
+//   }
+// };
+
+export const fetchContacts = createAsyncThunk('contacts/fetch', async () => {
+  const response = await axios.get(
+    'https://64c24ae1eb7fd5d6ebcf925f.mockapi.io/contacts'
+  );
+  return response.data;
+});
 
 const initialState = {
-  contacts: loadContactsFromLocalStorage(),
+  contacts: [],
   filter: '',
 };
 
@@ -68,6 +75,9 @@ const contactsReducer = createReducer(initialState, builder => {
     });
   builder.addCase(setFilter, (state, action) => {
     state.filter = action.payload;
+  });
+  builder.addCase(fetchContacts.fulfilled, (state, action) => {
+    state.contacts = action.payload;
   });
 });
 

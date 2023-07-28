@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { fetchContacts } from './contactsSlice';
 import { addContact, deleteContact, setFilter } from './contactsSlice';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
@@ -9,6 +10,11 @@ export const App = () => {
   const contacts = useSelector(state => state.contacts.contacts);
   const filter = useSelector(state => state.contacts.filter);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Fetch contacts from the backend API when the application starts or reloads
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleAddContact = contact => {
     dispatch(addContact(contact));
