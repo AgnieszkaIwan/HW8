@@ -1,30 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from 'hooks';
 
-const Navigation = ({ isAuthenticated, onLogout }) => {
+export const Navigation = () => {
+  const { isLoggedIn } = useAuth();
+
   return (
     <nav>
-      <ul>
-        <li>
-          <Link to="/contacts">Home</Link>
-        </li>
-        {!isAuthenticated ? (
-          <>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </>
-        ) : (
-          <li>
-            <button onClick={onLogout}>Logout</button>
-          </li>
-        )}
-      </ul>
+      <NavLink to="/">Home</NavLink>
+      {isLoggedIn && <NavLink to="/tasks">Tasks</NavLink>}
     </nav>
   );
 };
-
-export default Navigation;

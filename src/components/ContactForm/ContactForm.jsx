@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/contacts/contactsSlice';
 import { nanoid } from 'nanoid';
 import { NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
