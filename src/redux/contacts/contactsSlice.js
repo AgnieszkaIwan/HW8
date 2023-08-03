@@ -1,4 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import {
   addContact,
   deleteContact,
@@ -6,39 +6,57 @@ import {
   fetchContacts,
 } from './operations';
 
-const initialState = {
-  contacts: [],
-  filter: '',
-};
+const contactsSlice = createSlice({
+  name: 'contacts',
+  initialState: {
+    contacts: [],
+    filter: '',
+    status: 'idle',
+    error: null,
+  },
+  reducers: {
+    setFilter: (state, action) => {
+      state.filter = action.payload;
+    },
+    setContacts: (state, action) => {
+      state.contacts = action.payload;
+    },
+  },
 
-const contactsReducer = createReducer(initialState, builder => {
-  builder
-    .addCase(addContact.pending, state => {
-      // Handle loading
-    })
-    .addCase(addContact.fulfilled, (state, action) => {
+  extraReducer: builder => {
+    builder.addCase(addContact.pending, state => {
+      state.status = 'loading';
+    });
+    builder.addCase(addContact.fulfilled, (state, action) => {
       state.contacts.push(action.payload);
-    })
-    .addCase(addContact.rejected, (state, action) => {
-      console.error(action.error.message);
-    })
-    .addCase(deleteContact.pending, state => {
-      // Handle loading
-    })
-    .addCase(deleteContact.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+    });
+    builder.addCase(addContact.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    });
+    builder.addCase(deleteContact.pending, state => {
+      state.status = 'loading';
+    });
+    builder.addCase(deleteContact.fulfilled, (state, action) => {
+      state.status = 'succeeded';
       state.contacts = state.contacts.filter(
         contact => contact.id !== action.payload
       );
-    })
-    .addCase(deleteContact.rejected, (state, action) => {
-      console.error(action.error.message);
     });
-  builder.addCase(setFilter, (state, action) => {
-    state.filter = action.payload;
-  });
-  builder.addCase(fetchContacts.fulfilled, (state, action) => {
-    state.contacts = action.payload;
-  });
+    builder.addCase(deleteContact.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    });
+    builder.addCase(setFilter, (state, action) => {
+      state.filter = action.payload;
+    });
+    builder.addCase(fetchContacts.fulfilled, (state, action) => {
+      state.contacts = action.payload;
+    });
+  },
 });
 
-export default contactsReducer;
+// export default contactsReducer;
+export const { setFilter, setContacts } = contactsSlice.actions;
+export default contactsSlice.reducer;
