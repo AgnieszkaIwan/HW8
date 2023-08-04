@@ -23,7 +23,7 @@ const contactsSlice = createSlice({
     },
   },
 
-  extraReducer: builder => {
+  extraReducers: builder => {
     builder.addCase(addContact.pending, state => {
       state.status = 'loading';
     });
