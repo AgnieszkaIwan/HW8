@@ -1,35 +1,35 @@
 {
   "files": {
     "main.css": "/goit-react-hw-08-phonebook/static/css/main.a3d5bcbe.css",
-    "main.js": "/goit-react-hw-08-phonebook/static/js/main.82d05524.js",
+    "main.js": "/goit-react-hw-08-phonebook/static/js/main.10614f78.js",
     "static/js/266.8ccaffc1.chunk.js": "/goit-react-hw-08-phonebook/static/js/266.8ccaffc1.chunk.js",
-    "static/css/928.b8880e60.chunk.css": "/goit-react-hw-08-phonebook/static/css/928.b8880e60.chunk.css",
-    "static/js/928.24f23640.chunk.js": "/goit-react-hw-08-phonebook/static/js/928.24f23640.chunk.js",
+    "static/css/40.1e05f24e.chunk.css": "/goit-react-hw-08-phonebook/static/css/40.1e05f24e.chunk.css",
+    "static/js/40.1016711d.chunk.js": "/goit-react-hw-08-phonebook/static/js/40.1016711d.chunk.js",
     "static/css/186.2eb95a8f.chunk.css": "/goit-react-hw-08-phonebook/static/css/186.2eb95a8f.chunk.css",
-    "static/js/186.b2316066.chunk.js": "/goit-react-hw-08-phonebook/static/js/186.b2316066.chunk.js",
+    "static/js/186.365a53cc.chunk.js": "/goit-react-hw-08-phonebook/static/js/186.365a53cc.chunk.js",
     "static/css/268.caad1b9a.chunk.css": "/goit-react-hw-08-phonebook/static/css/268.caad1b9a.chunk.css",
     "static/js/268.2de9dbd1.chunk.js": "/goit-react-hw-08-phonebook/static/js/268.2de9dbd1.chunk.js",
-    "static/js/907.c94e3b15.chunk.js": "/goit-react-hw-08-phonebook/static/js/907.c94e3b15.chunk.js",
-    "static/js/789.ba089f69.chunk.js": "/goit-react-hw-08-phonebook/static/js/789.ba089f69.chunk.js",
+    "static/js/270.b46117f4.chunk.js": "/goit-react-hw-08-phonebook/static/js/270.b46117f4.chunk.js",
+    "static/js/596.461cff0c.chunk.js": "/goit-react-hw-08-phonebook/static/js/596.461cff0c.chunk.js",
     "static/media/notification.svg?s3g3t9": "/goit-react-hw-08-phonebook/static/media/notification.5d0158671dd860c714c4.svg",
     "static/media/notification.eot": "/goit-react-hw-08-phonebook/static/media/notification.3657084dc0419605a91c.eot",
     "static/media/notification.woff?s3g3t9": "/goit-react-hw-08-phonebook/static/media/notification.c392cd33d9d9de730f9d.woff",
     "static/media/notification.ttf?s3g3t9": "/goit-react-hw-08-phonebook/static/media/notification.c5d9251ea82e42f75381.ttf",
     "index.html": "/goit-react-hw-08-phonebook/index.html",
     "main.a3d5bcbe.css.map": "/goit-react-hw-08-phonebook/static/css/main.a3d5bcbe.css.map",
-    "main.82d05524.js.map": "/goit-react-hw-08-phonebook/static/js/main.82d05524.js.map",
+    "main.10614f78.js.map": "/goit-react-hw-08-phonebook/static/js/main.10614f78.js.map",
     "266.8ccaffc1.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/266.8ccaffc1.chunk.js.map",
-    "928.b8880e60.chunk.css.map": "/goit-react-hw-08-phonebook/static/css/928.b8880e60.chunk.css.map",
-    "928.24f23640.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/928.24f23640.chunk.js.map",
+    "40.1e05f24e.chunk.css.map": "/goit-react-hw-08-phonebook/static/css/40.1e05f24e.chunk.css.map",
+    "40.1016711d.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/40.1016711d.chunk.js.map",
     "186.2eb95a8f.chunk.css.map": "/goit-react-hw-08-phonebook/static/css/186.2eb95a8f.chunk.css.map",
-    "186.b2316066.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/186.b2316066.chunk.js.map",
+    "186.365a53cc.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/186.365a53cc.chunk.js.map",
     "268.caad1b9a.chunk.css.map": "/goit-react-hw-08-phonebook/static/css/268.caad1b9a.chunk.css.map",
     "268.2de9dbd1.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/268.2de9dbd1.chunk.js.map",
-    "907.c94e3b15.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/907.c94e3b15.chunk.js.map",
-    "789.ba089f69.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/789.ba089f69.chunk.js.map"
+    "270.b46117f4.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/270.b46117f4.chunk.js.map",
+    "596.461cff0c.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/596.461cff0c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a3d5bcbe.css",
-    "static/js/main.82d05524.js"
+    "static/js/main.10614f78.js"
   ]
 }
